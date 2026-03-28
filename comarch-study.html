@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComArch Study — แนวข้อสอบ</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d1117;
+  --bg2: #161b22;
+  --bg3: #21262d;
+  --bg4: #30363d;
+  --border: #30363d;
+  --text: #e6edf3;
+  --text2: #8b949e;
+  --text3: #6e7681;
+  --accent: #58a6ff;
+  --accent2: #1f6feb;
+  --green: #3fb950;
+  --yellow: #d29922;
+  --orange: #f0883e;
+  --red: #f85149;
+  --purple: #bc8cff;
+  --teal: #39d353;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Sarabun', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+header {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 60px;
+}
+
+.logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+.logo span { color: var(--text2); }
+
+.practice-btn {
+  background: var(--accent2);
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-family: 'Sarabun', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.practice-btn:hover { background: var(--accent); transform: translateY(-1px); }
+.practice-btn.active { background: var(--orange); }
+
+/* ── TABS ── */
+.tab-bar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  overflow-x: auto;
+  padding: 0 24px;
+  scrollbar-width: none;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+
+.tab {
+  padding: 14px 18px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text2);
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all .2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+.tab-num {
+  background: var(--bg4);
+  color: var(--text2);
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.tab.active .tab-num { background: var(--accent2); color: #fff; }
+
+/* ── CONTENT ── */
+.content-area {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+}
+
+.question-panel { display: none; }
+.question-panel.active { display: block; animation: fadeIn .25s ease; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── CARDS ── */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.card-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text2);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-title::before {
+  content: '';
+  width: 3px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.q-header {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.q-tag {
+  display: inline-block;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-right: 6px;
+  margin-bottom: 16px;
+}
+
+/* ── ANSWER BLOCKS ── */
+.sub-q {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+}
+.sub-q-title {
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+.answer {
+  color: var(--green);
+  font-weight: 600;
+  margin: 8px 0;
+  padding: 10px 14px;
+  background: rgba(63,185,80,.1);
+  border-radius: 6px;
+  font-size: 15px;
+}
+.hint {
+  background: rgba(88,166,255,.08);
+  border: 1px solid rgba(88,166,255,.2);
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--text2);
+}
+.hint strong { color: var(--accent); }
+
+/* ── CODE BLOCKS ── */
+.code-block {
+  background: #010409;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-x: auto;
+  margin: 12px 0;
+  color: #e6edf3;
+}
+.code-block .kw { color: #ff7b72; }
+.code-block .label { color: #79c0ff; }
+.code-block .op { color: #d2a8ff; }
+.code-block .num { color: #56d364; }
+.code-block .cmt { color: #8b949e; }
+.code-block .addr { color: #ffa657; }
+
+/* ── FORMULA ── */
+.formula {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--yellow);
+  margin: 10px 0;
+  text-align: center;
+}
+
+/* ── TABLE ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin: 12px 0;
+}
+th {
+  background: var(--bg3);
+  color: var(--accent);
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  border: 1px solid var(--border);
+}
+td {
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+
+/* ── SVG DIAGRAMS ── */
+.diagram-wrap {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 14px 0;
+  overflow-x: auto;
+  text-align: center;
+}
+svg text { font-family: 'JetBrains Mono', monospace; }
+
+/* ── PIPELINE DIAGRAM ── */
+.pipeline-grid {
+  display: grid;
+  gap: 3px;
+  margin: 14px 0;
+  overflow-x: auto;
+}
+.pipe-cell {
+  padding: 8px 4px;
+  text-align: center;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  border-radius: 4px;
+  min-width: 40px;
+}
+.pipe-hdr { background: var(--bg4); color: var(--text2); font-size: 11px; }
+.pipe-s1 { background: rgba(88,166,255,.25); color: var(--accent); }
+.pipe-s2 { background: rgba(63,185,80,.25); color: var(--green); }
+.pipe-s3 { background: rgba(188,140,255,.25); color: var(--purple); }
+.pipe-empty { background: transparent; }
+
+/* ── PRACTICE MODE ── */
+.practice-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  z-index: 200;
+  backdrop-filter: blur(4px);
+}
+.practice-overlay.active { display: flex; align-items: flex-start; justify-content: center; }
+
+.practice-panel {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 760px;
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: 40px 16px;
+  animation: slideUp .3s ease;
+}
+@keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.practice-header {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  border-radius: 12px 12px 0 0;
+}
+.practice-title { font-weight: 700; font-size: 16px; color: var(--orange); }
+.close-btn {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all .2s;
+}
+.close-btn:hover { background: var(--bg4); color: var(--text); }
+
+.practice-content { padding: 24px; }
+
+.pq {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+.pq-text { font-size: 15px; margin-bottom: 14px; line-height: 1.7; }
+.reveal-btn {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--yellow);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'Sarabun', sans-serif;
+  transition: all .2s;
+}
+.reveal-btn:hover { background: var(--bg4); }
+.pq-answer {
+  display: none;
+  margin-top: 12px;
+  padding: 14px;
+  background: rgba(63,185,80,.08);
+  border: 1px solid rgba(63,185,80,.2);
+  border-radius: 6px;
+  color: var(--green);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.pq-answer.shown { display: block; }
+
+/* ── UTILS ── */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 4px;
+}
+.badge-green { background: rgba(63,185,80,.15); color: var(--green); }
+.badge-blue { background: rgba(88,166,255,.15); color: var(--accent); }
+.badge-orange { background: rgba(240,136,62,.15); color: var(--orange); }
+.badge-purple { background: rgba(188,140,255,.15); color: var(--purple); }
+.badge-red { background: rgba(248,81,73,.15); color: var(--red); }
+
+.warning {
+  background: rgba(210,153,34,.08);
+  border: 1px solid rgba(210,153,34,.3);
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--yellow);
+  margin: 10px 0;
+}
+.warning::before { content: '⚠ '; }
+
+.step { 
+  display: flex;
+  gap: 12px;
+  margin: 8px 0;
+  align-items: flex-start;
+}
+.step-num {
+  background: var(--accent2);
+  color: #fff;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+ul.styled, ol.styled {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+ul.styled li, ol.styled li {
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.sep { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+.row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 600px) { .row-2 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">COMARCH<span>.study</span></div>
+  <button class="practice-btn" onclick="togglePractice()">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm5 10a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm1-9a1 1 0 0 0-1 1v5a1 1 0 0 0 2 0V4a1 1 0 0 0-1-1z"/></svg>
+    Practice Mode
+  </button>
+</header>
+
+<!-- TABS -->
+<div class="tab-bar">
+  <div class="tab active" onclick="showTab(0)"><span class="tab-num">Q1</span>32-bit Word</div>
+  <div class="tab" onclick="showTab(1)"><span class="tab-num">Q2</span>Common Bus & AR</div>
+  <div class="tab" onclick="showTab(2)"><span class="tab-num">Q3</span>Postfix/Prefix</div>
+  <div class="tab" onclick="showTab(3)"><span class="tab-num">Q4</span>Microoperations</div>
+  <div class="tab" onclick="showTab(4)"><span class="tab-num">Q5</span>Pipeline ทั่วไป</div>
+  <div class="tab" onclick="showTab(5)"><span class="tab-num">Q6</span>Pipeline D[i]</div>
+  <div class="tab" onclick="showTab(6)"><span class="tab-num">Q7</span>Assembly Loop</div>
+  <div class="tab" onclick="showTab(7)"><span class="tab-num">Q8</span>Pipeline Hazards</div>
+</div>
+
+<!-- CONTENT -->
+<div class="content-area">
+
+<!-- ══════════ Q1: 32-bit Word ══════════ -->
+<div class="question-panel active" id="panel-0">
+  <div class="card">
+    <div class="q-header">Q1 — Basic Computer: 32-bit Word</div>
+    <span class="q-tag">Ch5</span><span class="q-tag">Instruction Format</span><span class="q-tag">Registers</span>
+    <p style="color:var(--text2)">โจทย์กำหนดว่า <strong style="color:var(--text)">มี 32 bits ต่อ 1 คำ (word)</strong> แทนที่จะเป็น 16-bit ของ Basic Computer เดิม แล้วถามคุณสมบัติต่าง ๆ</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">พื้นฐานที่ต้องเข้าใจก่อน</div>
+    <p>Basic Computer เดิม (16-bit word) มี memory 4096 words = 2<sup>12</sup> → ต้องใช้ <strong>12 bits</strong> เป็น address</p>
+    <p style="margin-top:8px">Format ของ instruction ปกติ:</p>
+    <div class="diagram-wrap">
+      <svg width="500" height="60" viewBox="0 0 500 60">
+        <rect x="10" y="10" width="60" height="40" fill="#21262d" stroke="#30363d" rx="4"/>
+        <text x="40" y="26" text-anchor="middle" fill="#8b949e" font-size="10">bit 15</text>
+        <text x="40" y="42" text-anchor="middle" fill="#58a6ff" font-size="12" font-weight="700">I</text>
+        <rect x="72" y="10" width="120" height="40" fill="#21262d" stroke="#30363d" rx="4"/>
+        <text x="132" y="26" text-anchor="middle" fill="#8b949e" font-size="10">bits 14–12</text>
+        <text x="132" y="42" text-anchor="middle" fill="#d2a8ff" font-size="12" font-weight="700">Opcode (3 bit)</text>
+        <rect x="194" y="10" width="296" height="40" fill="#21262d" stroke="#30363d" rx="4"/>
+        <text x="342" y="26" text-anchor="middle" fill="#8b949e" font-size="10">bits 11–0</text>
+        <text x="342" y="42" text-anchor="middle" fill="#ffa657" font-size="12" font-weight="700">Address (12 bit)</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">1.1) OP-Code กี่ bit?</div>
+    <p>ถ้า word = 32 bit และยังคงใช้ <strong>1 bit</strong> สำหรับ I (indirect mode) และ <strong>address field</strong> ต้องรองรับ memory ขนาดเดิม (หรือตามโจทย์กำหนด):</p>
+    <div class="hint">
+      <strong>วิธีคิด:</strong><br>
+      ถ้า memory = 4096 = 2<sup>12</sup> → Address = 12 bit, I = 1 bit<br>
+      ดังนั้น OP-code = 32 − 1 (I) − 12 (Address) = <strong style="color:var(--green)">19 bit</strong><br><br>
+      แต่ถ้าโจทย์ระบุ memory ใหม่ เช่น memory = 2<sup>20</sup>:<br>
+      OP-code = 32 − 1 − 20 = <strong style="color:var(--green)">11 bit</strong>
+    </div>
+    <div class="answer">✓ ตอบ: นับจาก 32 − 1 (I) − จำนวน bit ของ Address = จำนวน bit OP-code</div>
+    <div class="warning">เช็คโจทย์ให้ดีว่า memory กี่ words → ใช้กี่ bit เป็น address</div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">1.2) Register กี่ bit?</div>
+    <p>Register ใน Basic Computer มีขนาดตาม function:</p>
+    <table>
+      <tr><th>Register</th><th>ขนาด (เดิม 16-bit)</th><th>ขนาด (32-bit word)</th></tr>
+      <tr><td>AC, DR, IR, TR</td><td>16 bit</td><td><strong style="color:var(--green)">32 bit</strong> (= word size)</td></tr>
+      <tr><td>AR, PC</td><td>12 bit (= address bits)</td><td>ขึ้นอยู่กับ address field ใหม่</td></tr>
+      <tr><td>INPR, OUTR</td><td>8 bit (character)</td><td>8 bit (ไม่เปลี่ยน)</td></tr>
+    </table>
+    <div class="answer">✓ ตอบ: AR และ PC = จำนวน bit ของ address field | AC, DR, IR, TR = 32 bit</div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">1.3) เกี่ยวกับ bit — Addressing Mode</div>
+    <p>ใน instruction format ของ Basic Computer:</p>
+    <ul class="styled">
+      <li><strong>I = 0</strong> → Direct Addressing: EA = address field ใน instruction</li>
+      <li><strong>I = 1</strong> → Indirect Addressing: EA = M[address field]</li>
+    </ul>
+    <div class="hint">
+      <strong>วาดให้ดู:</strong><br>
+      Direct: Instruction[addr] → M[addr] = Operand<br>
+      Indirect: Instruction[addr] → M[addr] = addr2 → M[addr2] = Operand
+    </div>
+    <div class="answer">✓ bit 31 (MSB ถ้า 32-bit) = I (indirect flag), 1 bit เสมอ</div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">1.4) จำนวน Register / Register ที่มี</div>
+    <p>Basic Computer มี <strong>8 registers</strong> หลัก:</p>
+    <div class="row-2">
+      <div>
+        <span class="badge badge-blue">AR (12 bit)</span> Address Register<br>
+        <span class="badge badge-blue">PC (12 bit)</span> Program Counter<br>
+        <span class="badge badge-green">DR (16 bit)</span> Data Register<br>
+        <span class="badge badge-green">AC (16 bit)</span> Accumulator<br>
+      </div>
+      <div>
+        <span class="badge badge-green">IR (16 bit)</span> Instruction Register<br>
+        <span class="badge badge-green">TR (16 bit)</span> Temporary Register<br>
+        <span class="badge badge-orange">INPR (8 bit)</span> Input Register<br>
+        <span class="badge badge-orange">OUTR (8 bit)</span> Output Register<br>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">1.5) จำนวน Instruction ที่เป็นไปได้</div>
+    <p>จำนวน instruction = 2<sup>จำนวน bit OP-code</sup></p>
+    <div class="hint">
+      ตัวอย่าง: ถ้า OP-code = 19 bit → จำนวน instruction = 2<sup>19</sup> = 524,288 instructions<br>
+      แต่ใน Basic Computer เดิม: OP-code 3 bit → 2<sup>3</sup> = 8 memory-reference instructions + register/IO instructions (OP=111)
+    </div>
+    <div class="answer">✓ ตอบ: 2<sup>n</sup> โดย n = จำนวน bit OP-code</div>
+  </div>
+</div>
+
+<!-- ══════════ Q2: Common Bus & AR ══════════ -->
+<div class="question-panel" id="panel-1">
+  <div class="card">
+    <div class="q-header">Q2 — Common Bus System & AR Register</div>
+    <span class="q-tag">Ch5</span><span class="q-tag">Bus</span><span class="q-tag">AR</span><span class="q-tag">Flowchart</span>
+    <p style="color:var(--text2)">ถามเกี่ยวกับ Common Bus System การทำงานของ Register โดยเฉพาะ <strong style="color:var(--text)">AR (Address Register)</strong> และ Flowchart ของ Computer Operation</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Common Bus System — วงจร</div>
+    <div class="diagram-wrap">
+      <svg width="680" height="340" viewBox="0 0 680 340">
+        <!-- Bus line -->
+        <rect x="20" y="155" width="640" height="30" fill="#21262d" stroke="#30363d" rx="4"/>
+        <text x="340" y="175" text-anchor="middle" fill="#58a6ff" font-size="11" font-weight="700">16-bit Common Bus</text>
+        <!-- S lines -->
+        <text x="620" y="148" fill="#8b949e" font-size="10">S₂S₁S₀</text>
+
+        <!-- Memory -->
+        <rect x="20" y="20" width="80" height="55" fill="#0d1117" stroke="#58a6ff" rx="4"/>
+        <text x="60" y="42" text-anchor="middle" fill="#58a6ff" font-size="11">Memory</text>
+        <text x="60" y="57" text-anchor="middle" fill="#8b949e" font-size="9">4096×16</text>
+        <line x1="60" y1="75" x2="60" y2="155" stroke="#30363d" stroke-dasharray="4"/>
+        <text x="72" y="105" fill="#d29922" font-size="9">S=111</text>
+
+        <!-- AR -->
+        <rect x="120" y="20" width="70" height="40" fill="#0d1117" stroke="#3fb950" rx="4"/>
+        <text x="155" y="44" text-anchor="middle" fill="#3fb950" font-size="12" font-weight="700">AR</text>
+        <line x1="155" y1="60" x2="155" y2="155" stroke="#30363d" stroke-dasharray="4"/>
+        <text x="164" y="100" fill="#d29922" font-size="9">S=001</text>
+
+        <!-- PC -->
+        <rect x="210" y="20" width="70" height="40" fill="#0d1117" stroke="#3fb950" rx="4"/>
+        <text x="245" y="44" text-anchor="middle" fill="#3fb950" font-size="12" font-weight="700">PC</text>
+        <line x1="245" y1="60" x2="245" y2="155" stroke="#30363d" stroke-dasharray="4"/>
+        <text x="254" y="100" fill="#d29922" font-size="9">S=010</text>
+
+        <!-- DR -->
+        <rect x="300" y="20" width="70" height="40" fill="#0d1117" stroke="#bc8cff" rx="4"/>
+        <text x="335" y="44" text-anchor="middle" fill="#bc8cff" font-size="12" font-weight="700">DR</text>
+        <line x1="335" y1="60" x2="335" y2="155" stroke="#30363d" stroke-dasharray="4"/>
+        <text x="344" y="100" fill="#d29922" font-size="9">S=011</text>
+
+        <!-- AC -->
+        <rect x="390" y="20" width="70" height="40" fill="#0d1117" stroke="#bc8cff" rx="4"/>
+        <text x="425" y="44" text-anchor="middle" fill="#bc8cff" font-size="12" font-weight="700">AC</text>
+        <line x1="425" y1="60" x2="425" y2="155" stroke="#30363d" stroke-dasharray="4"/>
+        <text x="434" y="100" fill="#d29922" font-size="9">S=100</text>
+
+        <!-- IR -->
+        <rect x="480" y="20" width="70" height="40" fill="#0d1117" stroke="#ffa657" rx="4"/>
+        <text x="515" y="44" text-anchor="middle" fill="#ffa657" font-size="12" font-weight="700">IR</text>
+        <line x1="515" y1="60" x2="515" y2="155" stroke="#30363d" stroke-dasharray="4"/>
+        <text x="524" y="100" fill="#d29922" font-size="9">S=101</text>
+
+        <!-- TR -->
+        <rect x="570" y="20" width="70" height="40" fill="#0d1117" stroke="#ffa657" rx="4"/>
+        <text x="605" y="44" text-anchor="middle" fill="#ffa657" font-size="12" font-weight="700">TR</text>
+        <line x1="605" y1="60" x2="605" y2="155" stroke="#30363d" stroke-dasharray="4"/>
+        <text x="614" y="100" fill="#d29922" font-size="9">S=110</text>
+
+        <!-- INPR / OUTR below bus -->
+        <rect x="120" y="200" width="70" height="40" fill="#0d1117" stroke="#f85149" rx="4"/>
+        <text x="155" y="224" text-anchor="middle" fill="#f85149" font-size="11">INPR</text>
+        <line x1="155" y1="185" x2="155" y2="200" stroke="#30363d" stroke-dasharray="4"/>
+
+        <rect x="210" y="200" width="70" height="40" fill="#0d1117" stroke="#f85149" rx="4"/>
+        <text x="245" y="224" text-anchor="middle" fill="#f85149" font-size="11">OUTR</text>
+        <line x1="245" y1="185" x2="245" y2="200" stroke="#30363d" stroke-dasharray="4"/>
+
+        <!-- ALU -->
+        <rect x="350" y="240" width="130" height="50" fill="#0d1117" stroke="#58a6ff" stroke-dasharray="5" rx="6"/>
+        <text x="415" y="260" text-anchor="middle" fill="#58a6ff" font-size="11">ALU</text>
+        <text x="415" y="278" text-anchor="middle" fill="#8b949e" font-size="10">E (carry flag)</text>
+        <line x1="425" y1="185" x2="425" y2="240" stroke="#30363d" stroke-dasharray="4"/>
+
+        <!-- Labels -->
+        <text x="340" y="320" text-anchor="middle" fill="#8b949e" font-size="11">LD = Load   INR = Increment   CLR = Clear</text>
+      </svg>
+    </div>
+
+    <table>
+      <tr><th>S₂</th><th>S₁</th><th>S₀</th><th>Register ที่ส่งออก Bus</th></tr>
+      <tr><td>0</td><td>0</td><td>0</td><td>ไม่มี (x)</td></tr>
+      <tr><td>0</td><td>0</td><td>1</td><td><strong style="color:var(--green)">AR</strong></td></tr>
+      <tr><td>0</td><td>1</td><td>0</td><td><strong style="color:var(--green)">PC</strong></td></tr>
+      <tr><td>0</td><td>1</td><td>1</td><td>DR</td></tr>
+      <tr><td>1</td><td>0</td><td>0</td><td>AC</td></tr>
+      <tr><td>1</td><td>0</td><td>1</td><td>IR</td></tr>
+      <tr><td>1</td><td>1</td><td>0</td><td>TR</td></tr>
+      <tr><td>1</td><td>1</td><td>1</td><td>Memory</td></tr>
+    </table>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">AR (Address Register) — หน้าที่และการทำงาน</div>
+    <p><strong>AR</strong> = ตัวที่บอกว่า "จะไปหยิบข้อมูลจาก memory ตรงไหน" (holds the memory address)</p>
+    <ul class="styled">
+      <li>AR เป็น <strong>12-bit register</strong> (เพราะ address = 12 bit สำหรับ 4096 locations)</li>
+      <li>ทุกครั้งที่อ่าน/เขียน memory → ต้องใส่ address ลง AR ก่อน</li>
+      <li>เงื่อนไขการ Load AR: <code style="color:var(--accent)">AR ← PC</code>, <code style="color:var(--accent)">AR ← IR(0-11)</code></li>
+    </ul>
+    <div class="hint">
+      <strong>ตัวอย่าง signal ที่ activate AR:</strong><br>
+      R₀T₄: AR ← 0, TR, PC (Load AR จาก PC)<br>
+      D₅T₅: AR ← IR(0-11) (Load AR จาก instruction field)<br>
+      สัญญาณที่ทำให้ AR ทำงาน = R₀ AND T₄, หรือ D₅ AND T₅ → ผ่าน OR gate → LD ของ AR
+    </div>
+    <div class="answer">✓ AR = ดูที่ตั้งไว้ว่าตรองไหน — เก็บ address ของ memory ที่จะเข้าถึง</div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">วงจร Load AR (ตาม Signal)</div>
+    <div class="diagram-wrap">
+      <svg width="440" height="160" viewBox="0 0 440 160">
+        <!-- AND gates -->
+        <rect x="20" y="20" width="100" height="30" fill="#21262d" stroke="#30363d" rx="4"/>
+        <text x="70" y="39" text-anchor="middle" fill="#e6edf3" font-size="11">R₀ AND T₄</text>
+
+        <rect x="20" y="70" width="100" height="30" fill="#21262d" stroke="#30363d" rx="4"/>
+        <text x="70" y="89" text-anchor="middle" fill="#e6edf3" font-size="11">D₅ AND T₅</text>
+
+        <rect x="20" y="120" width="100" height="30" fill="#21262d" stroke="#30363d" rx="4"/>
+        <text x="70" y="139" text-anchor="middle" fill="#e6edf3" font-size="11">... เงื่อนไขอื่น</text>
+
+        <!-- OR gate -->
+        <rect x="180" y="65" width="80" height="45" fill="#1f6feb" stroke="#58a6ff" rx="6"/>
+        <text x="220" y="90" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">OR</text>
+        <text x="220" y="104" text-anchor="middle" fill="#c0d4f5" font-size="9">gate</text>
+
+        <!-- Lines to OR -->
+        <line x1="120" y1="35" x2="180" y2="75" stroke="#30363d"/>
+        <line x1="120" y1="85" x2="180" y2="87" stroke="#30363d"/>
+        <line x1="120" y1="135" x2="180" y2="100" stroke="#30363d"/>
+
+        <!-- Output -->
+        <line x1="260" y1="87" x2="340" y2="87" stroke="#3fb950" stroke-width="2"/>
+        <rect x="340" y="67" width="80" height="40" fill="#0d1117" stroke="#3fb950" rx="6"/>
+        <text x="380" y="87" text-anchor="middle" fill="#3fb950" font-size="12" font-weight="700">AR</text>
+        <text x="380" y="101" text-anchor="middle" fill="#8b949e" font-size="9">LD signal</text>
+      </svg>
+    </div>
+    <p style="font-size:14px;color:var(--text2)">หลักการ: หลาย AND gate → OR gate เดียว → LD (Load) ของ AR<br>ถ้าเงื่อนไขใดๆ เป็น 1 → AR จะถูก load</p>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">Instruction Fetch Cycle (RT₁–RT₂)</div>
+    <div class="code-block">
+<span class="cmt">; Fetch Cycle</span>
+RT₁: <span class="op">AR ← PC</span>          <span class="cmt">; copy PC → AR (เพื่อไปหยิบ instruction)</span>
+RT₂: <span class="op">IR ← M[AR], PC ← PC+1</span>   <span class="cmt">; อ่าน memory → IR, เพิ่ม PC</span>
+     <span class="op">AR ← IR(0-11)</span>    <span class="cmt">; decode address จาก instruction</span>
+RT₃: <span class="cmt">; Decode opcode IR(12-14), I = IR(15)</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ Q3: Postfix/Prefix ══════════ -->
+<div class="question-panel" id="panel-2">
+  <div class="card">
+    <div class="q-header">Q3 — Postfix / Prefix / 3-Address Instruction</div>
+    <span class="q-tag">Expression</span><span class="q-tag">Addressing</span>
+    <p style="color:var(--text2)">แปลงนิพจน์ระหว่าง Infix ↔ Postfix ↔ Prefix และเขียน 3-address instruction</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Prefix / Infix / Postfix — สรุปหลัก</div>
+    <table>
+      <tr><th>ชนิด</th><th>ตำแหน่ง Operator</th><th>ตัวอย่าง A+B</th></tr>
+      <tr><td><span class="badge badge-blue">Prefix</span></td><td>ก่อน operand</td><td>+ A B</td></tr>
+      <tr><td><span class="badge badge-green">Infix</span></td><td>ระหว่าง operand</td><td>A + B</td></tr>
+      <tr><td><span class="badge badge-orange">Postfix</span></td><td>หลัง operand</td><td>A B +</td></tr>
+    </table>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">3.1) แปลง Postfix → Infix: A+B*C-D</div>
+    <p><strong>โจทย์ (Postfix):</strong> <code style="color:var(--yellow)">A B C * + D -</code></p>
+    <div class="card-title" style="font-size:11px;margin-top:12px">วิธีทำ — ใช้ Stack</div>
+    <div class="step"><div class="step-num">1</div><div>อ่าน <code>A</code> → push "A"</div></div>
+    <div class="step"><div class="step-num">2</div><div>อ่าน <code>B</code> → push "B"</div></div>
+    <div class="step"><div class="step-num">3</div><div>อ่าน <code>C</code> → push "C"</div></div>
+    <div class="step"><div class="step-num">4</div><div>อ่าน <code>*</code> → pop B, C → push "(B*C)"</div></div>
+    <div class="step"><div class="step-num">5</div><div>อ่าน <code>+</code> → pop A, (B*C) → push "(A+(B*C))"</div></div>
+    <div class="step"><div class="step-num">6</div><div>อ่าน <code>D</code> → push "D"</div></div>
+    <div class="step"><div class="step-num">7</div><div>อ่าน <code>-</code> → pop (A+(B*C)), D → push "((A+(B*C))-D)"</div></div>
+    <div class="answer">✓ Infix: (A + (B*C)) - D</div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">3.1) แปลง Postfix → Prefix (ตัวอย่างจากโจทย์)</div>
+    <p>โจทย์ตามในเอกสาร: <code style="color:var(--yellow)">A+B*C-D</code> (Infix) → แปลงเป็น Prefix</p>
+    <div class="hint">
+      <strong>วิธีจำเร็ว — Prefix:</strong><br>
+      เขียน operator ก่อน operand ซ้าย+ขวาเสมอ<br>
+      A + (B*C) - D = - + A * B C D
+    </div>
+    <div class="answer">✓ Prefix: - + A * B C D</div>
+    <div class="answer">✓ Postfix: A B C * + D -</div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">3.2) เขียนเป็น 3-Address Instruction</div>
+    <p>สำหรับ expression: <strong>(A + B) * C - D / E</strong></p>
+    <div class="code-block">
+<span class="cmt">; 3-Address format: OP dst, src1, src2</span>
+<span class="op">MUL</span> <span class="label">T1</span>, A, B      <span class="cmt">; T1 = A + B   (หมายเหตุ: ตามโจทย์)</span>
+<span class="op">ADD</span> <span class="label">T1</span>, A, B      <span class="cmt">; T1 = A + B</span>
+<span class="op">DIV</span> <span class="label">T2</span>, D, E      <span class="cmt">; T2 = D / E</span>
+<span class="op">MUL</span> <span class="label">T3</span>, T1, C     <span class="cmt">; T3 = T1 * C</span>
+<span class="op">SUB</span> <span class="label">T4</span>, T3, T2   <span class="cmt">; T4 = T3 - T2 = result</span>
+    </div>
+    <div class="hint">
+      <strong>3-Address</strong> = ระบุ destination และ 2 source ต่อ instruction<br>
+      ข้อดี: ไม่ต้องใช้ตัวแปรชั่วคราวเยอะ, คำสั่งน้อย<br>
+      ข้อเสีย: instruction ยาวมาก (ต้องเก็บ 3 addresses)
+    </div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">เปรียบเทียบ Addressing Modes</div>
+    <table>
+      <tr><th>Type</th><th>จำนวน address/instruction</th><th>คำสั่ง (สำหรับ A=B+C)</th></tr>
+      <tr><td>3-Address</td><td>3</td><td>ADD A, B, C</td></tr>
+      <tr><td>2-Address</td><td>2</td><td>MOV A,B / ADD A,C</td></tr>
+      <tr><td>1-Address</td><td>1</td><td>LDA B / ADD C / STA A</td></tr>
+      <tr><td>0-Address (Stack)</td><td>0</td><td>PUSH B / PUSH C / ADD / POP A</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════ Q4: Microoperations ══════════ -->
+<div class="question-panel" id="panel-3">
+  <div class="card">
+    <div class="q-header">Q4 — Microoperations: DR, AC, MAR, ADD</div>
+    <span class="q-tag">Ch4</span><span class="q-tag">Ch5</span><span class="q-tag">RTL</span>
+    <p style="color:var(--text2)">อธิบาย microoperation ที่เกิดขึ้นใน instruction ต่างๆ เช่น LDA, ADD, STA เป็นต้น</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Memory Reference Instructions — Microoperations</div>
+    <table>
+      <tr><th>Instruction</th><th>Timing</th><th>Microoperation</th><th>ความหมาย</th></tr>
+      <tr><td rowspan="2"><strong style="color:var(--accent)">AND</strong></td><td>D₀T₄</td><td>DR ← M[AR]</td><td>อ่าน operand</td></tr>
+      <tr><td>D₀T₅</td><td>AC ← AC ∧ DR, SC ← 0</td><td>AND แล้วเก็บใน AC</td></tr>
+      <tr><td rowspan="2"><strong style="color:var(--green)">ADD</strong></td><td>D₁T₄</td><td>DR ← M[AR]</td><td>อ่าน operand</td></tr>
+      <tr><td>D₁T₅</td><td>AC ← AC + DR, E ← C_out, SC ← 0</td><td>บวก, เก็บ carry ใน E</td></tr>
+      <tr><td rowspan="2"><strong style="color:var(--purple)">LDA</strong></td><td>D₂T₄</td><td>DR ← M[AR]</td><td>อ่าน operand</td></tr>
+      <tr><td>D₂T₅</td><td>AC ← DR, SC ← 0</td><td>load ค่า → AC</td></tr>
+      <tr><td rowspan="2"><strong style="color:var(--orange)">STA</strong></td><td>D₃T₄</td><td>M[AR] ← AC, SC ← 0</td><td>เขียน AC → memory</td></tr>
+      <tr><td>D₃T₅</td><td>-</td><td>-</td></tr>
+      <tr><td rowspan="2"><strong style="color:var(--yellow)">BUN</strong></td><td>D₄T₄</td><td>PC ← AR, SC ← 0</td><td>กระโดดไป address ใน AR</td></tr>
+      <tr><td>-</td><td>-</td><td>-</td></tr>
+      <tr><td rowspan="2"><strong style="color:var(--red)">ISZ</strong></td><td>D₆T₄</td><td>DR ← M[AR]</td><td>อ่าน operand</td></tr>
+      <tr><td>D₆T₅<br>D₆T₆</td><td>DR ← DR+1<br>M[AR] ← DR, if (DR=0) PC←PC+1, SC←0</td><td>increment, เขียนกลับ, skip ถ้า 0</td></tr>
+    </table>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">อธิบาย: ADD Microoperation ทีละขั้น</div>
+    <div class="code-block">
+<span class="cmt">; === Fetch Phase ===</span>
+RT₁: <span class="op">AR ← PC</span>                 <span class="cmt">; AR = ตำแหน่ง instruction</span>
+RT₂: <span class="op">IR ← M[AR], PC ← PC+1</span>   <span class="cmt">; โหลด instruction, เพิ่ม PC</span>
+     <span class="op">AR ← IR(0-11)</span>            <span class="cmt">; AR = address ของ operand</span>
+
+<span class="cmt">; === Decode Phase ===</span>
+RT₃: <span class="op">D₀...D₇ ← Decode IR(12-14)</span> <span class="cmt">; decode opcode</span>
+
+<span class="cmt">; === Execute Phase (ADD = D₁) ===</span>
+D₁T₄: <span class="op">DR ← M[AR]</span>               <span class="cmt">; DR = M[address] (ดึง operand)</span>
+D₁T₅: <span class="op">AC ← AC + DR</span>             <span class="cmt">; AC = AC + DR (บวกกัน)</span>
+       <span class="op">E ← C_out</span>               <span class="cmt">; E เก็บ carry</span>
+       <span class="op">SC ← 0</span>                  <span class="cmt">; reset sequence counter</span>
+    </div>
+    <div class="answer">✓ ADD ใช้ทั้งหมด 5 clock cycles (T1–T5)</div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">RTL Symbols ที่ต้องรู้</div>
+    <table>
+      <tr><th>Symbol</th><th>ความหมาย</th><th>ตัวอย่าง</th></tr>
+      <tr><td>←</td><td>Transfer / Load</td><td>AC ← DR</td></tr>
+      <tr><td>M[AR]</td><td>Memory content at AR</td><td>DR ← M[AR]</td></tr>
+      <tr><td>IR(0-11)</td><td>Bits 0–11 of IR</td><td>AR ← IR(0-11)</td></tr>
+      <tr><td>SC ← 0</td><td>Reset Sequence Counter</td><td>End of instruction</td></tr>
+      <tr><td>D₁</td><td>Decoder output (opcode=001)</td><td>ADD instruction</td></tr>
+      <tr><td>T₄</td><td>Timing signal at T=4</td><td>4th clock</td></tr>
+      <tr><td>∧</td><td>AND operation</td><td>AC ← AC ∧ DR</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════ Q5: Pipeline ══════════ -->
+<div class="question-panel" id="panel-4">
+  <div class="card">
+    <div class="q-header">Q5 — Pipeline: Speedup & Comparison</div>
+    <span class="q-tag">Ch9</span><span class="q-tag">Pipeline</span><span class="q-tag">Speedup</span>
+    <p style="color:var(--text2)">คำนวณ Speedup ของ Pipelined vs Non-Pipelined, วาด pipeline diagram, เปรียบเทียบ</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Pipeline — สูตรสำคัญ</div>
+    <div class="formula">τ_k = (k + n - 1) × t_p</div>
+    <table>
+      <tr><th>Symbol</th><th>ความหมาย</th></tr>
+      <tr><td><strong style="color:var(--accent)">n</strong></td><td>จำนวน task ที่ต้องทำ</td></tr>
+      <tr><td><strong style="color:var(--accent)">k</strong></td><td>จำนวน stage ของ pipeline</td></tr>
+      <tr><td><strong style="color:var(--accent)">t_p</strong></td><td>เวลาต่อ 1 clock cycle ของ pipeline</td></tr>
+      <tr><td><strong style="color:var(--accent)">τ_k</strong></td><td>เวลารวมที่ pipeline ใช้</td></tr>
+      <tr><td><strong style="color:var(--green)">t_n</strong></td><td>เวลา 1 instruction แบบ non-pipeline</td></tr>
+      <tr><td><strong style="color:var(--green)">τ_1 = n × t_n</strong></td><td>เวลารวมแบบ non-pipeline</td></tr>
+    </table>
+    <div class="formula">S_k = (n × t_n) / ((k + n - 1) × t_p)</div>
+    <div class="hint">
+      <strong>กรณีพิเศษ:</strong> ถ้า t_n = k × t_p (แต่ละ stage เท่ากัน) และ n → ∞<br>
+      lim S_k = t_n / t_p = k<br>
+      → Speedup สูงสุดที่ได้คือ <strong style="color:var(--green)">k เท่า</strong>
+    </div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">5.1) วาด Pipeline Diagram</div>
+    <p>สมมติ pipeline 3 stages, ทำ 5 tasks:</p>
+    <div class="diagram-wrap">
+      <div class="pipeline-grid" style="grid-template-columns: 80px repeat(8,50px)">
+        <div class="pipe-cell pipe-hdr">Task ＼ Cycle</div>
+        <div class="pipe-cell pipe-hdr">1</div><div class="pipe-cell pipe-hdr">2</div><div class="pipe-cell pipe-hdr">3</div><div class="pipe-cell pipe-hdr">4</div><div class="pipe-cell pipe-hdr">5</div><div class="pipe-cell pipe-hdr">6</div><div class="pipe-cell pipe-hdr">7</div><div class="pipe-cell pipe-hdr">8</div>
+        <!-- Task 1 -->
+        <div class="pipe-cell pipe-hdr">Task 1</div>
+        <div class="pipe-cell pipe-s1">S1</div><div class="pipe-cell pipe-s2">S2</div><div class="pipe-cell pipe-s3">S3</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div>
+        <!-- Task 2 -->
+        <div class="pipe-cell pipe-hdr">Task 2</div>
+        <div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-s1">S1</div><div class="pipe-cell pipe-s2">S2</div><div class="pipe-cell pipe-s3">S3</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div>
+        <!-- Task 3 -->
+        <div class="pipe-cell pipe-hdr">Task 3</div>
+        <div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-s1">S1</div><div class="pipe-cell pipe-s2">S2</div><div class="pipe-cell pipe-s3">S3</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div>
+        <!-- Task 4 -->
+        <div class="pipe-cell pipe-hdr">Task 4</div>
+        <div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-s1">S1</div><div class="pipe-cell pipe-s2">S2</div><div class="pipe-cell pipe-s3">S3</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div>
+        <!-- Task 5 -->
+        <div class="pipe-cell pipe-hdr">Task 5</div>
+        <div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-s1">S1</div><div class="pipe-cell pipe-s2">S2</div><div class="pipe-cell pipe-s3">S3</div><div class="pipe-cell pipe-empty">-</div>
+      </div>
+    </div>
+    <div class="hint">
+      k=3, n=5 → τ_k = (3+5-1) × t_p = 7t_p<br>
+      Non-pipeline: τ₁ = 5 × 3t_p = 15t_p<br>
+      <strong>Speedup = 15t_p / 7t_p ≈ 2.14</strong>
+    </div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">5.2) วิธีเพิ่ม Speedup</div>
+    <ul class="styled">
+      <li>เพิ่มจำนวน n (tasks) → speedup เข้าใกล้ k</li>
+      <li>ลด t_p ให้น้อยลง (clock เร็วขึ้น)</li>
+      <li>ทำให้แต่ละ stage ใช้เวลาเท่ากัน (balanced pipeline)</li>
+      <li>หลีกเลี่ยง pipeline hazards (stall)</li>
+    </ul>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">5.3) เปรียบเทียบ 2 Pipeline</div>
+    <p>โจทย์: Pipeline A (t_p = 0.2ns) vs Pipeline B (t_p = 0.1ns, 2 stages เพิ่ม) เมื่อ n เยอะมาก</p>
+    <div class="hint">
+      ถ้า n → ∞: Speedup ≈ t_n/t_p<br>
+      Pipeline B มี t_p น้อยกว่า → Speedup มากกว่า แม้จะมี stages เพิ่ม<br>
+      <strong>แต่ต้องระวัง overhead ของ pipeline registers ที่เพิ่มขึ้น</strong>
+    </div>
+    <div class="formula">S_A/S_B = t_p(B) / t_p(A) = 0.1/0.2 = 0.5 (A ช้ากว่า B)</div>
+  </div>
+</div>
+
+<!-- ══════════ Q6: Pipeline D[i] ══════════ -->
+<div class="question-panel" id="panel-5">
+  <div class="card">
+    <div class="q-header">Q6 — Pipelined D[i] = A[i]×B[i] + A[i]×C[i]</div>
+    <span class="q-tag">Ch9</span><span class="q-tag">Pipeline Design</span><span class="q-tag">Speedup</span>
+    <p style="color:var(--text2)">โจทย์จะให้ทำ D[i] = A[i]*B[i] + A[i]*C[i] สำหรับ i=1,2,...,n โดยใช้ pipeline</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">วิเคราะห์ Operation</div>
+    <p>D[i] = A[i]×B[i] + A[i]×C[i]</p>
+    <p style="margin-top:8px">แต่ละ iteration ต้องทำ:</p>
+    <ul class="styled">
+      <li><strong>Segment 1:</strong> Load A[i] และ B[i] จาก memory</li>
+      <li><strong>Segment 2:</strong> Multiply → R3 = R1 × R2, Load C[i] → R4</li>
+      <li><strong>Segment 3:</strong> Add → R5 = R3 + R4</li>
+    </ul>
+    <div class="code-block">
+<span class="cmt">; Pipeline Registers</span>
+<span class="label">R1 ← A[i]</span>        <span class="cmt">; Segment 1: Load A</span>
+<span class="label">R2 ← B[i]</span>        <span class="cmt">; Segment 1: Load B</span>
+<span class="label">R3 ← R1 × R2</span>    <span class="cmt">; Segment 2: Multiply A×B</span>
+<span class="label">R4 ← C[i]</span>        <span class="cmt">; Segment 2: Load C</span>
+<span class="label">R5 ← R3 + R4</span>    <span class="cmt">; Segment 3: Add</span>
+<span class="cmt">; D[i] = R5</span>
+    </div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">6.1) วาด Pipeline Diagram (3 Segments)</div>
+    <div class="diagram-wrap">
+      <svg width="580" height="200" viewBox="0 0 580 200">
+        <!-- Segment boxes -->
+        <rect x="10" y="40" width="160" height="60" fill="#161b22" stroke="#58a6ff" rx="6"/>
+        <text x="90" y="65" text-anchor="middle" fill="#58a6ff" font-size="11" font-weight="700">Segment 1</text>
+        <text x="90" y="82" text-anchor="middle" fill="#8b949e" font-size="10">Load A[i], B[i]</text>
+        <text x="50" y="92" text-anchor="middle" fill="#ffa657" font-size="9">R1←A[i]</text>
+        <text x="130" y="92" text-anchor="middle" fill="#ffa657" font-size="9">R2←B[i]</text>
+
+        <!-- Register between seg 1 and 2 -->
+        <rect x="178" y="55" width="12" height="30" fill="#30363d" stroke="#58a6ff" rx="2"/>
+
+        <rect x="196" y="40" width="170" height="60" fill="#161b22" stroke="#3fb950" rx="6"/>
+        <text x="281" y="65" text-anchor="middle" fill="#3fb950" font-size="11" font-weight="700">Segment 2</text>
+        <text x="281" y="80" text-anchor="middle" fill="#8b949e" font-size="10">R3←R1×R2 (Multiply)</text>
+        <text x="281" y="95" text-anchor="middle" fill="#8b949e" font-size="10">R4←C[i] (Load C)</text>
+
+        <!-- Register between seg 2 and 3 -->
+        <rect x="374" y="55" width="12" height="30" fill="#30363d" stroke="#3fb950" rx="2"/>
+
+        <rect x="392" y="40" width="160" height="60" fill="#161b22" stroke="#bc8cff" rx="6"/>
+        <text x="472" y="65" text-anchor="middle" fill="#bc8cff" font-size="11" font-weight="700">Segment 3</text>
+        <text x="472" y="82" text-anchor="middle" fill="#8b949e" font-size="10">R5 ← R3 + R4 (Add)</text>
+        <text x="472" y="96" text-anchor="middle" fill="#ffa657" font-size="10">D[i] = R5</text>
+
+        <!-- Arrows -->
+        <line x1="170" y1="70" x2="178" y2="70" stroke="#30363d" stroke-width="2" marker-end="url(#arr)"/>
+        <line x1="190" y1="70" x2="196" y2="70" stroke="#30363d" stroke-width="2"/>
+        <line x1="366" y1="70" x2="374" y2="70" stroke="#30363d" stroke-width="2"/>
+        <line x1="386" y1="70" x2="392" y2="70" stroke="#30363d" stroke-width="2"/>
+
+        <!-- Input arrow -->
+        <line x1="0" y1="70" x2="10" y2="70" stroke="#58a6ff" stroke-width="2"/>
+        <text x="2" y="60" fill="#58a6ff" font-size="9">Input</text>
+
+        <!-- Output arrow -->
+        <line x1="552" y1="70" x2="570" y2="70" stroke="#bc8cff" stroke-width="2"/>
+        <text x="555" y="60" fill="#bc8cff" font-size="9">D[i]</text>
+
+        <!-- Labels -->
+        <text x="90" y="130" text-anchor="middle" fill="#d29922" font-size="10">Stage 1 Register</text>
+        <text x="185" y="130" text-anchor="middle" fill="#d29922" font-size="10">↑</text>
+        <text x="380" y="130" text-anchor="middle" fill="#d29922" font-size="10">↑</text>
+
+        <!-- Timing note -->
+        <text x="290" y="160" text-anchor="middle" fill="#8b949e" font-size="11">k=3 stages, n iterations → τ = (3+n-1)×t_p = (n+2)×t_p</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">6.2) คำนวณ Speedup</div>
+    <p>สมมติ t_n = 3t_p (แต่ละ stage ใช้เวลา t_p เท่ากัน)</p>
+    <div class="formula">Non-pipeline: τ₁ = n × 3t_p</div>
+    <div class="formula">Pipeline (k=3): τ_k = (3 + n - 1) × t_p = (n+2) × t_p</div>
+    <div class="formula">S_k = 3n / (n+2)</div>
+    <div class="hint">
+      n=7: S = 3×7/(7+2) = 21/9 ≈ <strong style="color:var(--green)">2.33</strong><br>
+      n→∞: S → 3 = k <br>
+      Speedup สูงสุด = จำนวน stages = 3
+    </div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">6.3) เปรียบเทียบ 6.2 vs 6.1 (Speedup)</div>
+    <p>ถ้า 6.1 = non-pipeline, 6.2 = pipeline, n เดียวกัน:</p>
+    <div class="hint">
+      <strong>Pipeline เร็วกว่า Non-pipeline เสมอ</strong> เมื่อ n > 1<br>
+      S_k → k เมื่อ n มาก<br>
+      แต่ถ้า n=1: pipeline ช้ากว่า เพราะต้อง fill ทุก stage ก่อน
+    </div>
+    <div class="answer">✓ Pipeline เหมาะกับงานที่มีจำนวน task เยอะ (n >> k)</div>
+  </div>
+</div>
+
+<!-- ══════════ Q7: Assembly Loop ══════════ -->
+<div class="question-panel" id="panel-6">
+  <div class="card">
+    <div class="q-header">Q7 — Assembly: เขียน Loop + แปลงเป็น Hex</div>
+    <span class="q-tag">Ch6</span><span class="q-tag">Assembly</span><span class="q-tag">Loop</span>
+    <p style="color:var(--text2)">โจทย์กำหนด pseudocode → เขียน Assembly ของ Basic Computer → แปลงเป็น Base 16</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">โจทย์ (จาก Exam Notes)</div>
+    <div class="code-block">
+<span class="cmt">; Pseudocode ที่ให้มา:</span>
+i = -5
+sum = 0
+<span class="kw">while</span> (i ≤ 0) {
+  <span class="kw">if</span> (i == -2 || i == -4)
+    sum = sum + (-i - i)   <span class="cmt">// sum = sum + 2×|i|</span>
+  <span class="kw">else</span>
+    sum = sum + (-i)        <span class="cmt">// sum = sum + |i|</span>
+  i = i + 1
+}
+output sum
+    </div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">7.1) เขียน Assembly Language (Basic Computer)</div>
+    <div class="code-block">
+          <span class="cmt">     ORG 100        / Program starts at location 100</span>
+
+          <span class="kw">LDA</span> <span class="label">IVAL</span>       / Load i = -5 → AC
+          <span class="kw">STA</span> <span class="label">I</span>          / Store i
+
+          <span class="kw">LDA</span> <span class="label">SVAL</span>       / Load sum = 0 → AC
+          <span class="kw">STA</span> <span class="label">SUM</span>        / Store sum
+
+<span class="label">LOOP,</span>     <span class="kw">LDA</span> <span class="label">I</span>          / Load i
+          <span class="kw">SPA</span>            / Skip if AC > 0 (i > 0 → exit loop)
+          <span class="kw">BUN</span> <span class="label">DONE</span>       / Branch to DONE if i > 0
+
+          <span class="cmt">          / Check if i == -2</span>
+          <span class="kw">ADD</span> <span class="label">POS2</span>       / AC = i + 2  (if i=-2, AC=0)
+          <span class="kw">SZA</span>            / Skip if AC = 0 (i == -2)
+          <span class="kw">BUN</span> <span class="label">CK4</span>        / Not -2, check -4
+
+          <span class="kw">BUN</span> <span class="label">SPEC</span>       / i == -2, go to special case
+
+<span class="label">CK4,</span>      <span class="kw">LDA</span> <span class="label">I</span>          / Reload i
+          <span class="kw">ADD</span> <span class="label">POS4</span>       / AC = i + 4 (if i=-4, AC=0)
+          <span class="kw">SZA</span>            / Skip if AC = 0 (i == -4)
+          <span class="kw">BUN</span> <span class="label">ELSE</span>       / Not -4, go to else
+
+<span class="label">SPEC,</span>     <span class="cmt">          / Special case: sum = sum + 2×|i|</span>
+          <span class="kw">LDA</span> <span class="label">I</span>          / Load i
+          <span class="kw">CMA</span>            / Complement → ~i
+          <span class="kw">INC</span>            / +1 → -i (two's complement)
+          <span class="kw">ADD</span> <span class="label">I_NEG</span>      / Multiply by 2: -i + (-i) ...
+          <span class="cmt">          / (ทำ 2 ครั้ง หรือ shift)</span>
+          <span class="kw">CMA</span>            / -i
+          <span class="kw">INC</span>            / = |i|
+          <span class="kw">ADD</span> <span class="label">I</span>          / AC = |i| + i... 
+          <span class="cmt">          /-- วิธีง่ายกว่า: -i-i = -(2i) --</span>
+          <span class="kw">LDA</span> <span class="label">I</span>          / Load i
+          <span class="kw">CMA</span>            / ~i
+          <span class="kw">INC</span>            / -i
+          <span class="kw">STA</span> <span class="label">TEMP</span>       / TEMP = -i
+          <span class="kw">ADD</span> <span class="label">TEMP</span>       / AC = -i + (-i) = -2i = 2|i|
+          <span class="kw">ADD</span> <span class="label">SUM</span>        / AC = sum + 2|i|
+          <span class="kw">STA</span> <span class="label">SUM</span>        / Store new sum
+          <span class="kw">BUN</span> <span class="label">INCR</span>       / Go to increment
+
+<span class="label">ELSE,</span>     <span class="cmt">          / Normal case: sum = sum + |i|</span>
+          <span class="kw">LDA</span> <span class="label">I</span>          / Load i
+          <span class="kw">CMA</span>            / Complement
+          <span class="kw">INC</span>            / -i = |i| (since i ≤ 0)
+          <span class="kw">ADD</span> <span class="label">SUM</span>        / AC = sum + |i|
+          <span class="kw">STA</span> <span class="label">SUM</span>        / Store new sum
+
+<span class="label">INCR,</span>     <span class="kw">LDA</span> <span class="label">I</span>          / Load i
+          <span class="kw">INC</span>            / i = i + 1
+          <span class="kw">STA</span> <span class="label">I</span>          / Store i
+          <span class="kw">BUN</span> <span class="label">LOOP</span>       / Repeat loop
+
+<span class="label">DONE,</span>     <span class="kw">LDA</span> <span class="label">SUM</span>        / Load result
+          <span class="kw">OUT</span>            / Output
+          <span class="kw">HLT</span>            / Halt
+
+<span class="cmt">; --- Data ---</span>
+<span class="label">IVAL,</span>     <span class="kw">DEC</span> -5
+<span class="label">SVAL,</span>     <span class="kw">DEC</span>  0
+<span class="label">POS2,</span>     <span class="kw">DEC</span>  2
+<span class="label">POS4,</span>     <span class="kw">DEC</span>  4
+<span class="label">TEMP,</span>     <span class="kw">HEX</span>  0
+<span class="label">I,</span>        <span class="kw">HEX</span>  0
+<span class="label">SUM,</span>      <span class="kw">HEX</span>  0
+          <span class="kw">END</span>
+    </div>
+    <div class="warning">ตรวจ logic: i=-5,-4,-3,-2,-1,0 → ค่า sum ที่คาดหวังตาม pseudocode</div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">7.2) แปลง Assembly → Hex (Machine Code)</div>
+    <p>ตัวอย่างการแปลง instruction เป็น Hex:</p>
+    <table>
+      <tr><th>Assembly</th><th>หลักการแปลง</th><th>Hex</th></tr>
+      <tr><td>LDA SUM (direct)</td><td>opcode=2, I=0, addr=location of SUM</td><td>2xxx</td></tr>
+      <tr><td>LDA SUM I (indirect)</td><td>opcode=2, I=1, addr=location</td><td>Axxx</td></tr>
+      <tr><td>CMA</td><td>Register-ref: 0111 0010 0000 0000</td><td>7200</td></tr>
+      <tr><td>INC</td><td>Register-ref: 0111 0000 0010 0000</td><td>7020</td></tr>
+      <tr><td>SZA</td><td>Register-ref: 0111 0000 0000 0100</td><td>7004</td></tr>
+      <tr><td>SPA</td><td>Register-ref: 0111 0000 0001 0000</td><td>7010</td></tr>
+      <tr><td>HLT</td><td>Register-ref: 0111 0000 0000 0001</td><td>7001</td></tr>
+      <tr><td>OUT</td><td>I/O: 1111 0100 0000 0000</td><td>F400</td></tr>
+    </table>
+    <div class="hint">
+      <strong>วิธีแปลง Memory Reference Instruction:</strong><br>
+      bit [15] = I (0=direct, 1=indirect)<br>
+      bits [14-12] = opcode (AND=000, ADD=001, LDA=010, STA=011, BUN=100, BSA=101, ISZ=110)<br>
+      bits [11-0] = address (hex ของ label)<br><br>
+      ตัวอย่าง: LDA ที่ address 0x115 → 0 010 000100010101 = 2115
+    </div>
+    <div class="code-block">
+<span class="cmt">; Hex Code Table ของ Register-Reference Instructions</span>
+CLA = <span class="num">7800</span>  CLE = <span class="num">7400</span>  CMA = <span class="num">7200</span>  CME = <span class="num">7100</span>
+CIR = <span class="num">7080</span>  CIL = <span class="num">7040</span>  INC = <span class="num">7020</span>  SPA = <span class="num">7010</span>
+SNA = <span class="num">7008</span>  SZA = <span class="num">7004</span>  SZE = <span class="num">7002</span>  HLT = <span class="num">7001</span>
+<span class="cmt">; I/O Instructions</span>
+INP = <span class="num">F800</span>  OUT = <span class="num">F400</span>  SKI = <span class="num">F200</span>  SKO = <span class="num">F100</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ Q8: Pipeline Hazards ══════════ -->
+<div class="question-panel" id="panel-7">
+  <div class="card">
+    <div class="q-header">Q8 — Pipeline Hazards</div>
+    <span class="q-tag">Ch9</span><span class="q-tag">Hazards</span><span class="q-tag">Stall</span>
+    <p style="color:var(--text2)">3 ประเภทของ Pipeline Hazard และวิธีแก้ไข</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Major Hazards in Pipelined Execution</div>
+    <div class="row-2">
+      <div class="sub-q" style="margin-bottom:0">
+        <div class="sub-q-title" style="color:var(--red)">1. Structural Hazards</div>
+        <p style="font-size:14px"><em>Resource Conflicts</em></p>
+        <p style="font-size:14px;margin-top:8px">เกิดเมื่อ hardware resource ถูกใช้พร้อมกันโดย 2 instructions ที่ต่างกัน</p>
+        <div class="hint" style="margin-top:8px;font-size:13px">
+          <strong>ตัวอย่าง:</strong> memory เดียวกันถูกใช้ทั้ง fetch instruction และ load data พร้อมกัน<br><br>
+          <strong>แก้ไข:</strong><br>
+          • แยก Instruction Memory และ Data Memory<br>
+          • Pipeline interlock (stall/bubble)
+        </div>
+      </div>
+      <div class="sub-q" style="margin-bottom:0">
+        <div class="sub-q-title" style="color:var(--yellow)">2. Data Hazards</div>
+        <p style="font-size:14px"><em>Data Dependency Conflicts</em></p>
+        <p style="font-size:14px;margin-top:8px">Instruction ถัดไปต้องใช้ผลลัพธ์ของ instruction ก่อนที่ยังไม่เสร็จ</p>
+        <div class="hint" style="margin-top:8px;font-size:13px">
+          <strong>ตัวอย่าง:</strong><br>
+          <code>ADD R1, R2, R3</code> ← ยังไม่เสร็จ<br>
+          <code>SUB R4, R1, R5</code> ← ต้องการ R1<br><br>
+          <strong>แก้ไข:</strong><br>
+          • Data Forwarding / Bypassing<br>
+          • NOP insertion (stall)<br>
+          • Out-of-order execution
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:16px" class="sub-q">
+      <div class="sub-q-title" style="color:var(--orange)">3. Control Hazards (Branch Hazards)</div>
+      <p style="font-size:14px">เกิดจาก Branch instruction ที่เปลี่ยน PC ทำให้ instruction ที่ fetch มาแล้วต้อง discard</p>
+      <div class="row-2" style="margin-top:12px">
+        <div class="hint">
+          <strong>Branch address dependency:</strong><br>
+          ไม่รู้ว่าจะ branch ไปไหนจนกว่าจะ execute instruction นั้น<br>
+          → flush pipeline
+        </div>
+        <div class="hint">
+          <strong>แก้ไข:</strong><br>
+          • Branch prediction (static/dynamic)<br>
+          • Delayed branching<br>
+          • Branch target buffer
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">Data Hazard Example — Pipeline Diagram</div>
+    <div class="diagram-wrap">
+      <div class="pipeline-grid" style="grid-template-columns: 100px repeat(7,55px)">
+        <div class="pipe-cell pipe-hdr">Instruction</div>
+        <div class="pipe-cell pipe-hdr">C1</div><div class="pipe-cell pipe-hdr">C2</div><div class="pipe-cell pipe-hdr">C3</div><div class="pipe-cell pipe-hdr">C4</div><div class="pipe-cell pipe-hdr">C5</div><div class="pipe-cell pipe-hdr">C6</div><div class="pipe-cell pipe-hdr">C7</div>
+
+        <div class="pipe-cell pipe-hdr" style="font-size:10px">ADD R1,R2,R3</div>
+        <div class="pipe-cell pipe-s1">IF</div><div class="pipe-cell pipe-s2">ID</div><div class="pipe-cell pipe-s3">EX</div><div class="pipe-cell" style="background:rgba(63,185,80,.25);color:var(--green)">WB</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-empty">-</div>
+
+        <div class="pipe-cell pipe-hdr" style="font-size:10px">SUB R4,R1,R5</div>
+        <div class="pipe-cell pipe-empty">-</div><div class="pipe-cell pipe-s1">IF</div>
+        <div class="pipe-cell" style="background:rgba(248,81,73,.2);color:var(--red);font-size:11px">STALL</div>
+        <div class="pipe-cell" style="background:rgba(248,81,73,.2);color:var(--red);font-size:11px">STALL</div>
+        <div class="pipe-cell pipe-s2">ID</div><div class="pipe-cell pipe-s3">EX</div><div class="pipe-cell" style="background:rgba(63,185,80,.25);color:var(--green)">WB</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--text2);margin-top:8px">STALL = pipeline หยุดรอ (bubble) ทำให้สูญเสียประสิทธิภาพ</p>
+    <div class="hint">
+      <strong>Pipeline Interlock</strong> = วงจรที่ตรวจจับ hazard และ insert stall โดยอัตโนมัติ<br>
+      → detect hazards stall until it is cleared
+    </div>
+  </div>
+
+  <div class="sub-q">
+    <div class="sub-q-title">สรุป เปรียบเทียบ 3 Hazards</div>
+    <table>
+      <tr><th>Hazard</th><th>สาเหตุ</th><th>วิธีแก้หลัก</th></tr>
+      <tr><td><span class="badge badge-red">Structural</span></td><td>Resource conflict (hardware)</td><td>แยก resource / stall</td></tr>
+      <tr><td><span class="badge badge-orange">Data</span></td><td>Data dependency ระหว่าง instructions</td><td>Forwarding / NOP / reorder</td></tr>
+      <tr><td><span class="badge badge-purple">Control</span></td><td>Branch เปลี่ยน PC</td><td>Branch prediction / flush</td></tr>
+    </table>
+  </div>
+</div>
+
+</div><!-- end content-area -->
+
+<!-- ══════════ PRACTICE OVERLAY ══════════ -->
+<div class="practice-overlay" id="practiceOverlay">
+  <div class="practice-panel">
+    <div class="practice-header">
+      <div class="practice-title">🎯 Practice Mode — แบบฝึกหัด</div>
+      <button class="close-btn" onclick="togglePractice()">✕ ปิด</button>
+    </div>
+    <div class="practice-content" id="practiceContent">
+      <!-- Dynamically generated -->
+    </div>
+  </div>
+</div>
+
+<script>
+// ── TAB SWITCHING ──
+function showTab(idx) {
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', i===idx));
+  document.querySelectorAll('.question-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+}
+
+// ── PRACTICE MODE ──
+const practiceData = [
+  // Q1
+  { q: 'ถ้า Basic Computer มี 32-bit word และ memory = 2²⁰ words OP-code จะมีกี่ bit?', a: '32 − 1 (I) − 20 (address) = 11 bit OP-code → รองรับ 2¹¹ = 2048 instructions' },
+  { q: 'Register AR ของ 32-bit Basic Computer (memory 2²⁰) ควรมีขนาดกี่ bit?', a: 'AR = 20 bit เพราะต้องเก็บ address ได้ถึง 2²⁰ locations' },
+  { q: 'ใน 16-bit Basic Computer ถ้า IR = 1010 0001 0110 0011 จะรู้ได้อย่างไรว่า instruction type อะไร?', a: 'bit 15 = 1 (I=1, indirect), bits 14-12 = 010 = opcode 2 = LDA, address = 0001 0110 0011 = 0x163 → LDA 163 I (indirect LDA)' },
+  // Q2
+  { q: 'S₂S₁S₀ = 011 หมายความว่าอะไรใน Common Bus System?', a: 'S=011 → DR (Data Register) ส่งข้อมูลออกมาบน bus' },
+  { q: 'ลำดับ microoperation ของ Fetch Cycle คืออะไร? เขียน RTL', a: 'RT₁: AR←PC | RT₂: IR←M[AR], PC←PC+1, AR←IR(0-11) | RT₃: Decode IR(12-14)' },
+  { q: 'เหตุใด AR จึงเป็น 12 bit แต่ AC เป็น 16 bit ใน Basic Computer?', a: 'AR ต้องเก็บ address (12 bit สำหรับ 4096 locations) แต่ AC เก็บ data (16 bit = word size)' },
+  // Q3
+  { q: 'แปลง Postfix "A B + C D - *" เป็น Infix', a: 'อ่านทีละตัว: push A,B → + → (A+B) → push C,D → - → (C-D) → * → (A+B)*(C-D) ✓' },
+  { q: 'แปลง Infix "(A-B)*(C+D)" เป็น Postfix และ Prefix', a: 'Postfix: A B - C D + * | Prefix: * - A B + C D' },
+  { q: 'เขียน 2-address instruction สำหรับ A = B + C - D', a: 'MOV A, B | ADD A, C | SUB A, D (ผลลัพธ์อยู่ใน A)' },
+  // Q4
+  { q: 'ADD instruction ใช้กี่ clock cycles? อธิบาย microoperation แต่ละ cycle', a: '5 cycles: T1:AR←PC | T2:IR←M[AR],PC++ | T3:decode | T4:DR←M[AR] | T5:AC←AC+DR,SC←0' },
+  { q: 'ISZ instruction ทำอะไรบ้าง? เมื่อไหรถึงจะ skip?', a: 'ISZ: อ่าน M[AR]→DR, DR←DR+1, เขียน DR→M[AR], ถ้า DR=0 ให้ PC←PC+1 (skip instruction ถัดไป)' },
+  { q: 'อธิบาย STA instruction ใน RTL notation', a: 'D₃T₄: M[AR]←AC, SC←0 — เขียน AC ลง memory ที่ address ใน AR' },
+  // Q5
+  { q: 'Pipeline 4 stages ทำ 10 tasks แต่ละ stage ใช้ 5ns ใช้เวลารวมเท่าไหร่ และ Speedup เท่าไหร่?', a: 'τ_k = (4+10-1)×5 = 65ns | τ₁ = 10×20 = 200ns | S = 200/65 ≈ 3.08' },
+  { q: 'Speedup สูงสุดของ pipeline 5 stages คือเท่าไหร่ เมื่อ n→∞?', a: 'S_max = k = 5 เท่า (เมื่อ t_n = k×t_p และ n→∞)' },
+  { q: 'ทำไม Speedup จริงๆ ถึงไม่ถึง k เท่าเสมอ?', a: 'เพราะ (1) pipeline ต้อง fill ช่วงแรก (2) hazards ทำให้ stall (3) stage อาจไม่ balanced' },
+  // Q6
+  { q: 'D[i] = A[i]*B[i] + A[i]*C[i] สำหรับ i=1..7 ใช้ 3-stage pipeline ใช้เวลาเท่าไหร่? (t_p=1ns)', a: 'τ = (3+7-1)×1 = 9ns | Non-pipeline: 7×3 = 21ns | Speedup = 21/9 ≈ 2.33' },
+  { q: 'ถ้าต้องการลด latency ต่อ iteration ของ D[i] pipeline ควรทำอย่างไร?', a: 'เพิ่ม stages (sub-divide operations), ลด t_p ของแต่ละ stage, ใช้ faster hardware (multiplier/adder)' },
+  // Q7
+  { q: 'เขียน Assembly Basic Computer สำหรับ: AC = 10 + 20 - 5', a: 'LDA TEN | ADD TWO | ADD TWO... (ใช้ DEC 10, DEC 20, DEC -5 เป็น data) หรือ LDA A / ADD B / STA RES' },
+  { q: 'CMA + INC ทำอะไร? เพราะอะไรถึงใช้ 2 คำสั่งนี้รวมกัน?', a: 'CMA = complement ทุก bit, INC = +1 → ผลรวมคือ two\'s complement = นิเสธ (-AC) ใช้เพื่อ negate ค่าใน AC' },
+  { q: 'HLT มี Hex code อะไร? และทำไมถึงต้องมีใน program?', a: 'HLT = 7001 หยุดการทำงานของ computer ป้องกัน CPU รัน instruction ที่ไม่ใช่ program ต่อ' },
+  // Q8
+  { q: 'อธิบาย Data Hazard พร้อมยกตัวอย่าง instruction 2 ตัวที่ทำให้เกิด', a: 'เกิดเมื่อ instruction ที่ 2 ต้องใช้ผลจาก instruction ที่ 1 ที่ยังไม่เสร็จ เช่น ADD R1,R2,R3 แล้ว SUB R4,R1,R5 → R1 ยังไม่พร้อม' },
+  { q: 'Data Forwarding แก้ Data Hazard ได้อย่างไร?', a: 'Forward ผลลัพธ์จาก EX stage ไปให้ stage ถัดไปโดยตรง ไม่ต้องรอ WB → ลด stall cycles' },
+  { q: 'Structural Hazard vs Control Hazard ต่างกันอย่างไร?', a: 'Structural = hardware resource ไม่พอ (เช่น memory) | Control = branch เปลี่ยน PC ทำให้ instruction ที่ fetch มาแล้วไม่ถูกต้อง' }
+];
+
+let practiceMode = false;
+
+function togglePractice() {
+  practiceMode = !practiceMode;
+  const overlay = document.getElementById('practiceOverlay');
+  const btn = document.querySelector('.practice-btn');
+  overlay.classList.toggle('active', practiceMode);
+  btn.classList.toggle('active', practiceMode);
+
+  if (practiceMode) {
+    generatePractice();
+  }
+}
+
+function generatePractice() {
+  // Pick 6-8 random questions
+  const shuffled = [...practiceData].sort(() => Math.random() - 0.5).slice(0, 8);
+  const container = document.getElementById('practiceContent');
+  container.innerHTML = '<p style="color:var(--text2);font-size:14px;margin-bottom:20px">คลิก "เฉลย" เพื่อดูคำตอบในแต่ละข้อ</p>';
+  
+  shuffled.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'pq';
+    div.innerHTML = `
+      <div class="pq-text"><strong style="color:var(--accent)">ข้อ ${i+1}.</strong> ${item.q}</div>
+      <button class="reveal-btn" onclick="revealAnswer(this)">📋 เฉลย</button>
+      <div class="pq-answer">${item.a}</div>
+    `;
+    container.appendChild(div);
+  });
+
+  const regen = document.createElement('button');
+  regen.className = 'reveal-btn';
+  regen.style.cssText = 'margin-top:20px;background:var(--bg4);color:var(--accent);width:100%;padding:12px;';
+  regen.innerHTML = '🔄 สุ่มข้อใหม่';
+  regen.onclick = generatePractice;
+  container.appendChild(regen);
+}
+
+function revealAnswer(btn) {
+  const ans = btn.nextElementSibling;
+  ans.classList.toggle('shown');
+  btn.textContent = ans.classList.contains('shown') ? '🙈 ซ่อนเฉลย' : '📋 เฉลย';
+}
+
+// Close on outside click
+document.getElementById('practiceOverlay').addEventListener('click', function(e) {
+  if (e.target === this) togglePractice();
+});
+</script>
+</body>
+</html>
